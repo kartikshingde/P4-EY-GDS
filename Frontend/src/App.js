@@ -1,30 +1,29 @@
-import React from 'react';
-import "./App.css";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Login from './Pages/Auth/Login';
-import Register from './Pages/Auth/Register';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './Pages/Home/Home';
-import SetAvatar from './Pages/Avatar/setAvatar';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import './App.css';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import { useState } from 'react';
+import RefrshHandler from './RefrshHandler';
 
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const PrivateRoute = ({ element }) => {
+    return isAuthenticated ? element : <Navigate to="/login" />
+  }
 
-const App = () => {
   return (
-    
-      <div className="App" style={{backgroundColor:'grey'}}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/setAvatar" element={<SetAvatar />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          
-        </Routes>
-      </BrowserRouter>
-      </div>
-  )
+    <div className="App">
+      <RefrshHandler setIsAuthenticated={setIsAuthenticated} />
+      <Routes>
+        <Route path='/' element={<Navigate to="/login" />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/home' element={<PrivateRoute element={<Home />} />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
