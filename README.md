@@ -1,1 +1,1 @@
-"# MERN-Personal-Finanace Management"
+"# MERN-Expense-Tracker" 
