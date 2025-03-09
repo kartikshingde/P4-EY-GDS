@@ -6,7 +6,8 @@ import Home from './pages/Home';
 import { useState } from 'react';
 import RefrshHandler from './RefrshHandler';
 
-function App() {
+function App() {console.log('App component rendered');
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const PrivateRoute = ({ element }) => {
